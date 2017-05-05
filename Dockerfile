@@ -5,11 +5,13 @@ WORKDIR /var/www
 
 RUN \
   a2enmod rewrite && \
-  apt-get update && apt-get install -y git unzip libmcrypt-dev && \
+  apt-get update && apt-get install -y git unzip libmcrypt-dev libz-dev libmemcached-dev && \
   docker-php-source extract && \
   docker-php-ext-install bcmath && \
   docker-php-ext-install mcrypt && \
   docker-php-ext-install pdo_mysql && \
+  yes '' | pecl install -f memcached && \
+  echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini && \
   docker-php-source delete && \
   curl -sS https://getcomposer.org/installer | php -- --no-ansi --install-dir=/usr/bin --filename=composer
 
