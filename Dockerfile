@@ -3,8 +3,6 @@ MAINTAINER Shane Mc Cormack <dataforce@dataforce.org.uk>
 
 WORKDIR /var/www
 
-COPY errors.ini /usr/local/etc/php/conf.d/errors.ini
-
 RUN \
   a2enmod rewrite && \
   apt-get update && apt-get install -y git unzip libmcrypt-dev libz-dev libmemcached-dev && \
@@ -16,5 +14,7 @@ RUN \
   echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini && \
   docker-php-source delete && \
   curl -sS https://getcomposer.org/installer | php -- --no-ansi --install-dir=/usr/bin --filename=composer
+
+COPY errors.ini /usr/local/etc/php/conf.d/errors.ini
 
 EXPOSE 80
