@@ -3,6 +3,8 @@ MAINTAINER Shane Mc Cormack <dataforce@dataforce.org.uk>
 
 WORKDIR /var/www
 
+COPY errors.ini /usr/local/etc/php/conf.d/errors.ini
+
 RUN \
   a2enmod rewrite && \
   apt-get update && apt-get install -y git unzip libmcrypt-dev libz-dev libmemcached-dev && \
