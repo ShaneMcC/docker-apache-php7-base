@@ -7,11 +7,10 @@ COPY errors.ini /usr/local/etc/php/conf.d/errors.ini
 
 RUN \
   a2enmod rewrite && \
-  apt-get update && apt-get install -y git unzip libmcrypt-dev libz-dev libmemcached-dev libicu-dev && \
+  apt-get update && apt-get install -y git unzip libz-dev libmemcached-dev libicu-dev && \
   ln -s /usr/local/bin/php /usr/bin/php && \
   docker-php-source extract && \
   docker-php-ext-install bcmath && \
-  docker-php-ext-install mcrypt && \
   docker-php-ext-install pdo_mysql && \
   docker-php-ext-install intl && \
   yes '' | pecl install -f memcached && \
